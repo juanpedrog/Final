@@ -10,7 +10,29 @@
     tools:context="com.afinal.aplicacion.juanpedrog.recordatorio.MainActivity">
 
     <TextView
+        android:id="@+id/principal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/principal"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:background="#C0CA33"/>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    <Button
+        android:id="@+id/nuevo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:text="@string/btnRegistros"
+        android:layout_below="@+id/principal"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="63dp" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btnConsulta"
+        android:layout_below="@+id/nuevo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="65dp" />
 </RelativeLayout>
