@@ -3,4 +3,7 @@
     <string name="principal">PAGINA PRINCIPAL</string>
     <string name="btnRegistros">Nuevo Registro</string>
     <string name="btnConsulta">Consultar Registros</string>
+    <string name="nombre">Nombre</string>
+    <string name="articulo">Articulo</string>
+    <string name="fecha">Fecha a devolver</string>
 </resources>
