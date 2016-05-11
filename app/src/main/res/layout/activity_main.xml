@@ -35,4 +35,11 @@
         android:layout_below="@+id/nuevo"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="65dp" />
+    <ImageView
+        android:id="@+id/boton"
+        android:src="@drawable/button"
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="115dp"
+        android:layout_marginLeft="100dp"/>
 </RelativeLayout>
