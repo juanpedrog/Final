@@ -8,7 +8,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.afinal.aplicacion.juanpedrog.recordatorio.MainActivity"
-    android:background="@drawable/backgroung">
+    android:background="@drawable/background">
 
     <TextView
         android:id="@+id/principal"
