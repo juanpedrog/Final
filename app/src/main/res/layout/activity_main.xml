@@ -7,7 +7,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.afinal.aplicacion.juanpedrog.recordatorio.MainActivity">
+    tools:context="com.afinal.aplicacion.juanpedrog.recordatorio.MainActivity"
+    android:background="@drawable/backgroung">
 
     <TextView
         android:id="@+id/principal"
@@ -15,9 +16,10 @@
         android:layout_height="wrap_content"
         android:text="@string/principal"
         android:gravity="center"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:background="#C0CA33"/>
     <ImageView
+        android:contentDescription="@string/fondo"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
     <Button
@@ -36,10 +38,12 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="65dp" />
     <ImageView
+        android:contentDescription="@string/boton"
         android:id="@+id/boton"
         android:src="@drawable/button"
         android:layout_width="150dp"
         android:layout_height="100dp"
         android:layout_marginTop="115dp"
+        android:layout_marginStart="100dp"
         android:layout_marginLeft="100dp"/>
 </RelativeLayout>

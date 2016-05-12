@@ -6,4 +6,6 @@
     <string name="nombre">Nombre</string>
     <string name="articulo">Articulo</string>
     <string name="fecha">Fecha a devolver</string>
+    <string name="fondo">Fondo</string>
+    <string name="boton">Boton</string>
 </resources>
