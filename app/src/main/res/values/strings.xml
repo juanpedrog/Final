@@ -8,4 +8,6 @@
     <string name="fecha">Fecha a devolver</string>
     <string name="fondo">Fondo</string>
     <string name="boton">Boton</string>
+    <string name="txtNombre">Nombre de la persona</string>
+    <string name="txtArticulo">Nombre del articulo</string>
 </resources>
