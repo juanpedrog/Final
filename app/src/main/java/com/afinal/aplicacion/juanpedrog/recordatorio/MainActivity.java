@@ -3,8 +3,10 @@ package com.afinal.aplicacion.juanpedrog.recordatorio;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -20,7 +22,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
     private GoogleApiClient client;
-    ImageView btnRegistro;
+    Button btnRegistro;
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +31,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
-        btnRegistro=(ImageView) findViewById(R.id.boton);
-        btnRegistro.setOnClickListener(this);
+        btnRegistro=(Button) findViewById(R.id.nuevo);
+        try{
+            btnRegistro.setOnClickListener(this);
+        }catch(NullPointerException e){
+            System.out.println("NullPointerException");
+        }
+
     }
 
     @Override
@@ -77,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.boton:
+            case R.id.nuevo:
                 Intent intent=new Intent(MainActivity.this,Registro.class);
                 startActivity(intent);
                 break;
