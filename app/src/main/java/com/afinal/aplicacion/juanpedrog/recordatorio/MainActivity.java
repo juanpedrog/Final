@@ -2,6 +2,8 @@ package com.afinal.aplicacion.juanpedrog.recordatorio;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
+import android.media.DeniedByServerException;
 import android.net.Uri;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
@@ -37,7 +39,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }catch(NullPointerException e){
             System.out.println("NullPointerException");
         }
-
+        DbHelper helper=new DbHelper(this);
+        SQLiteDatabase db= helper.getWritableDatabase();
     }
 
     @Override
