@@ -35,10 +35,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="80dp"
                 android:layout_marginTop="40dp"
-                android:background="@drawable/button"
+                android:background="@drawable/custom_button"
                 android:text="@string/btnRegistros"
                 android:textStyle="italic"
-                android:textColor="#ffffff"
                 android:textSize="30sp"/>
         </LinearLayout>
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -51,9 +50,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="90dp"
                 android:textStyle="italic"
-                android:background="@drawable/button"
+                android:background="@drawable/custom_button"
                 android:text="@string/btnConsulta"
-                android:textColor="#ffffff"
                 android:textSize="30sp"/>
         </LinearLayout>
     </LinearLayout>
