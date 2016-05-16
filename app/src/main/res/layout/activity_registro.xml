@@ -39,7 +39,7 @@
             android:hint="@string/txtNombre"
             android:layout_marginStart="20dp"
             android:layout_marginLeft="20dp"
-            android:id="@+id/editText"
+            android:id="@+id/txtNombre"
             android:background="#ffffff"
             />
     </LinearLayout>
