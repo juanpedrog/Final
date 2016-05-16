@@ -67,7 +67,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(datos==null){
             Toast.makeText(this,"Error al agregar",Toast.LENGTH_SHORT).show();
         }else{
-            String[] arr=datos.getStringArray("Registro");
             //Toast.makeText(this,arr[0]+","+arr[1]+","+arr[2]+","+arr[3],Toast.LENGTH_LONG).show();
             basedatos.insertar(datos.getStringArray("Registro"));
         }

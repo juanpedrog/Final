@@ -37,7 +37,7 @@
             android:layout_width="220dp"
             android:layout_height="40dp"
             android:hint="@string/txtNombre"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="55dp"
             android:layout_marginLeft="20dp"
             android:id="@+id/txtNombre"
             android:background="#ffffff"
@@ -63,8 +63,33 @@
             android:layout_height="40dp"
             android:hint="@string/txtArticulo"
             android:layout_marginLeft="20dp"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="55dp"
             android:id="@+id/txtArticulo"
+            android:background="#ffffff"
+            />
+    </LinearLayout>
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lblDescripcion"
+            android:textColor="#000000"
+            android:id="@+id/lblDescripcion"
+            android:textSize="20sp"
+            android:background="#ffffff"
+            />
+        <EditText
+            android:layout_width="220dp"
+            android:layout_height="40dp"
+            android:hint="@string/txtArticulo"
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
+            android:id="@+id/txtDescripcion"
             android:background="#ffffff"
             />
     </LinearLayout>
@@ -93,6 +118,8 @@
             android:id="@+id/btnAgregar"
             android:text="Agregar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="0dp"
+            android:layout_weight="7"
+            android:background="@drawable/custom_button"/>
     </LinearLayout>
 </LinearLayout>

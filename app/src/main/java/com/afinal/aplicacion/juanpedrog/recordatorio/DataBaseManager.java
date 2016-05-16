@@ -16,12 +16,15 @@ public class DataBaseManager {
     public static final String CN_FECHA_PRESTAMO="fecha_prestamo";
     public static final String CN_FECHA_DEVOLUCION="fecha_devolucion";
     public static final String CN_DISPONIBLE="disponible";
+    public static final String CN_DESCRIPCION="descripcion";
 
     public static final String CREATE_TABLE="create table "+TABLE_NAME+"("+CN_ID+" integer primary key autoincrement,"+
             CN_NOMBRE+" text not null,"+
             CN_ARTICULO+" text not null," +
+            CN_DESCRIPCION+" text not null"+
             CN_FECHA_PRESTAMO+" text not null, "+
-            CN_FECHA_DEVOLUCION+" text not null"+");";
+            CN_FECHA_DEVOLUCION+" text not null"+
+            CN_DISPONIBLE+" text not null"+");";
 
     private DbHelper helper;
     private SQLiteDatabase db;
@@ -34,8 +37,10 @@ public class DataBaseManager {
         ContentValues valores=new ContentValues();
         valores.put(CN_NOMBRE,registros[0]);
         valores.put(CN_ARTICULO,registros[1]);
-        valores.put(CN_FECHA_PRESTAMO,registros[2]);
-        valores.put(CN_FECHA_DEVOLUCION,registros[3]);
+        valores.put(CN_DESCRIPCION,registros[2]);
+        valores.put(CN_FECHA_PRESTAMO,registros[3]);
+        valores.put(CN_FECHA_DEVOLUCION,registros[4]);
+        valores.put(CN_DISPONIBLE,registros[5]);
         return valores;
     }
     public void insertar(String[] registros){

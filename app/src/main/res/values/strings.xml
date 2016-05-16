@@ -10,4 +10,6 @@
     <string name="boton">Boton</string>
     <string name="txtNombre">Nombre de la persona</string>
     <string name="txtArticulo">Nombre del articulo</string>
+    <string name="lblDescripcion">Descripcion</string>
+    <string name="txtDescripcion">Descricpion del articulo</string>
 </resources>
