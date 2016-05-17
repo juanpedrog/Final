@@ -25,8 +25,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
     private GoogleApiClient client;
-    Button btnRegistro;
-    public DataBaseManager basedatos;
+    Button btnRegistro,btnConsulta;
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,12 +35,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
         btnRegistro=(Button) findViewById(R.id.nuevo);
+        btnConsulta=(Button)findViewById(R.id.btnconsulta);
         try{
             btnRegistro.setOnClickListener(this);
+            btnConsulta.setOnClickListener(this);
         }catch(NullPointerException e){
             System.out.println("NullPointerException");
         }
-        basedatos=new DataBaseManager(this);
     }
 
     @Override
@@ -62,14 +62,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Uri.parse("android-app://com.afinal.aplicacion.juanpedrog.recordatorio/http/host/path")
         );
         AppIndex.AppIndexApi.start(client, viewAction);
-        Intent intentRegistros=getIntent();
-        Bundle datos=intentRegistros.getExtras();
-        if(datos==null){
-            Toast.makeText(this,"Error al agregar",Toast.LENGTH_SHORT).show();
-        }else{
-            //Toast.makeText(this,arr[0]+","+arr[1]+","+arr[2]+","+arr[3],Toast.LENGTH_LONG).show();
-            basedatos.insertar(datos.getStringArray("Registro"));
-        }
+
     }
 
     @Override
@@ -99,6 +92,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.nuevo:
                 Intent intent=new Intent(MainActivity.this,Registro.class);
                 startActivity(intent);
+                break;
+            case R.id.btnconsulta:
+                Intent intentConsulta=new Intent(MainActivity.this,Consulta.class);
+                startActivity(intentConsulta);
                 break;
         }
     }

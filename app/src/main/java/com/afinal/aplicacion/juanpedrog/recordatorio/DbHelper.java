@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 public class DbHelper extends SQLiteOpenHelper {
     public static final String DB_NAME="registro.sqlite";
-    public static final int DB_SCHEME_VERSION=1;
+    public static final int DB_SCHEME_VERSION=3;
 
     public DbHelper(Context context) {
         super(context, DB_NAME,null,DB_SCHEME_VERSION);
@@ -21,6 +21,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("DROP TABLE IF EXISTS prestamos");
         db.execSQL(DataBaseManager.CREATE_TABLE);
     }
 }

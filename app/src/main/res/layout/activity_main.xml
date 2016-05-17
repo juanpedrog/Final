@@ -47,6 +47,7 @@
             android:layout_weight="1"
             android:orientation="vertical">
             <Button
+                android:id="@+id/btnconsulta"
                 android:layout_width="wrap_content"
                 android:layout_height="90dp"
                 android:textStyle="italic"

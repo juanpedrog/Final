@@ -97,7 +97,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btnAgregar:
-                Intent intent= new Intent(Registro.this,MainActivity.class);
+                Intent intent= new Intent(Registro.this,Consulta.class);
                 agregar(nombre,articulo,descripcion,fecha);
                 Toast.makeText(Registro.this,arr[1]+","+arr[2]+","+arr[5],Toast.LENGTH_LONG).show();
                 intent.putExtra("Registro",registro);

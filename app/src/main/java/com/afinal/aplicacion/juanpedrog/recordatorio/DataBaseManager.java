@@ -2,6 +2,7 @@ package com.afinal.aplicacion.juanpedrog.recordatorio;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.widget.TableLayout;
 
@@ -10,7 +11,7 @@ import android.widget.TableLayout;
  */
 public class DataBaseManager {
     public static final String TABLE_NAME="prestamos";
-    public static final String CN_ID="id";
+    public static final String CN_ID="_id";
     public static final String CN_NOMBRE="nombre";
     public static final String CN_ARTICULO="articulo";
     public static final String CN_FECHA_PRESTAMO="fecha_prestamo";
@@ -45,5 +46,10 @@ public class DataBaseManager {
     }
     public void insertar(String[] registros){
         db.insert(TABLE_NAME,null,generadorContent(registros));
+    }
+    public Cursor crearCursorDatos(){
+        String[] columnas=new String[]{CN_ID,CN_NOMBRE,CN_ARTICULO,CN_DESCRIPCION,CN_FECHA_PRESTAMO,CN_FECHA_DEVOLUCION
+        ,CN_DISPONIBLE};
+        return db.query(TABLE_NAME,columnas,null,null,null,null,null);
     }
 }
