@@ -65,9 +65,9 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
                     return "Entregar hoy";
                 }else{
                     if(numH[0]>numD[0]){
-                        return "pendiente";
+                        return "Retrasado";
                     }else{
-                        return "retrasado";
+                        return "Pendiente";
                     }
                 }
             }else{

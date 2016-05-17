@@ -22,9 +22,9 @@ public class DataBaseManager {
     public static final String CREATE_TABLE="create table "+TABLE_NAME+"("+CN_ID+" integer primary key autoincrement,"+
             CN_NOMBRE+" text not null,"+
             CN_ARTICULO+" text not null," +
-            CN_DESCRIPCION+" text not null"+
-            CN_FECHA_PRESTAMO+" text not null, "+
-            CN_FECHA_DEVOLUCION+" text not null"+
+            CN_DESCRIPCION+" text not null,"+
+            CN_FECHA_PRESTAMO+" text not null,"+
+            CN_FECHA_DEVOLUCION+" text not null,"+
             CN_DISPONIBLE+" text not null"+");";
 
     private DbHelper helper;

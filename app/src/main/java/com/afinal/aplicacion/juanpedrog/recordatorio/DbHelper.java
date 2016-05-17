@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 public class DbHelper extends SQLiteOpenHelper {
     public static final String DB_NAME="registro.sqlite";
-    public static final int DB_SCHEME_VERSION=3;
+    public static final int DB_SCHEME_VERSION=4;
 
     public DbHelper(Context context) {
         super(context, DB_NAME,null,DB_SCHEME_VERSION);
