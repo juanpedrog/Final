@@ -7,4 +7,7 @@
     <item
         android:id="@+id/menuEliminar"
         android:title="@string/menuEliminar"/>
+    <item
+        android:id="@+id/menuCambiarEstado"
+        android:title="@string/menuEstado"/>
 </menu>

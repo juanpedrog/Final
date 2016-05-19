@@ -14,4 +14,5 @@
     <string name="txtDescripcion">Descricpion del articulo</string>
     <string name="menuModif">Modificar</string>
     <string name="menuEliminar">Eliminar</string>
+    <string name="menuEstado">Cambiar Estado</string>
 </resources>

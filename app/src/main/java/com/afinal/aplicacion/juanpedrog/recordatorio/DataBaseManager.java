@@ -55,4 +55,7 @@ public class DataBaseManager {
     public void modificar(String[] registros){
         db.update(TABLE_NAME,generadorContent(registros),CN_NOMBRE+"=?",new String[]{registros[0]});
     }
+    public void eliminar(String fecha){
+        db.delete(TABLE_NAME,CN_FECHA_PRESTAMO+"=?",new String[]{fecha});
+    }
 }
