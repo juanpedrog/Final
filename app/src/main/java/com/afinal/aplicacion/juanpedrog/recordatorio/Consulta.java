@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.SwitchCompat;
 import android.view.ContextMenu;
 import android.view.View;
 import android.view.View.OnCreateContextMenuListener;
@@ -12,6 +13,8 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
+import java.util.Calendar;
+
 public class Consulta extends AppCompatActivity implements AdapterView.OnItemClickListener{
 
     public DataBaseManager basedatos;
@@ -19,17 +22,19 @@ public class Consulta extends AppCompatActivity implements AdapterView.OnItemCli
     SimpleCursorAdapter adapter;
     ListView lista;
     String[] registros;
+    Calendar calendar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_consulta);
+        calendar=Calendar.getInstance();
         basedatos=new DataBaseManager(this);
         Intent intentRegistros=getIntent();
         Bundle datos=intentRegistros.getExtras();
         lista=(ListView)findViewById(R.id.lista);
         lista.setOnItemClickListener(this);
         if(datos==null){
-            Toast.makeText(this,"Error al agregar",Toast.LENGTH_SHORT).show();
+
         }else{
             //Toast.makeText(this,arr[0]+","+arr[1]+","+arr[2]+","+arr[3],Toast.LENGTH_LONG).show();
             registros=datos.getStringArray("Registro");
@@ -41,6 +46,7 @@ public class Consulta extends AppCompatActivity implements AdapterView.OnItemCli
         cursor=basedatos.crearCursorDatos();
         adapter=new SimpleCursorAdapter(this,R.layout.lista,cursor,from,to);
         lista.setAdapter(adapter);
+        actualizar();
     }
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -52,9 +58,77 @@ public class Consulta extends AppCompatActivity implements AdapterView.OnItemCli
         super.onCreateContextMenu(menu, v, menuInfo);
         getMenuInflater().inflate(R.menu.contextmenu,menu);
     }
-
     @Override
     protected void onStart() {
         super.onStart();
+
+    }
+    public String validar(String fecHoy,String fecDev){
+        String[] arrH=fecHoy.split("/");
+        String[] arrD=fecDev.split("/");
+        int[] numH=new int[arrH.length];
+        int[] numD=new int[arrD.length];
+        for(int i=0;i<arrH.length;i++){
+            numH[i]=Integer.parseInt(arrH[i]);
+            numD[i]=Integer.parseInt(arrD[i]);
+        }
+        if(numH[2]==numD[2]){
+            if(numH[1]==numD[1]){
+                if(numH[0]==numD[0]){
+                    return "Entregar hoy";
+                }else{
+                    if(numH[0]>numD[0]){
+                        return "Retrasado";
+                    }else{
+                        return "Pendiente";
+                    }
+                }
+            }else{
+                if(numH[1]>numD[1]){
+                    return "Retrasado";
+                }else{
+                    return "Pendiente";
+                }
+            }
+        }else{
+            if(numH[2]>numD[2]){
+                return "Retrasado";
+            }else{
+                return"Pendiente";
+            }
+        }
+    }
+    public String sacarFechaActual(){
+        String[] arr;
+        arr=calendar.getTime().toString().split(" ");
+        switch (arr[1]){
+            case "Ene": arr[1]="1";break;
+            case "Feb": arr[1]="2";break;
+            case "Mar": arr[1]="3";break;
+            case "Apr": arr[1]="4";break;
+            case "May": arr[1]="5";break;
+            case "Jun": arr[1]="6";break;
+            case "Jul": arr[1]="7";break;
+            case "Ago": arr[1]="8";break;
+            case "Sep": arr[1]="9";break;
+            case "Oct": arr[1]="10";break;
+            case "Nov": arr[1]="11";break;
+            case "Dic": arr[1]="12";break;
+        }
+        return arr[2]+"/"+arr[1]+"/"+arr[5];
+    }
+    public void actualizar(){
+        cursor.moveToFirst();
+        String[] arr=new String[6];
+        Toast.makeText(this,cursor.getString(1),Toast.LENGTH_SHORT).show();
+            do{
+                arr[0]=cursor.getString(1);
+                arr[1]=cursor.getString(2);
+                arr[2]=cursor.getString(3);
+                arr[3]=cursor.getString(4);
+                arr[4]=cursor.getString(5);
+                arr[5]=validar(sacarFechaActual(),cursor.getString(5));
+                basedatos.modificar(arr);
+            }while(cursor.moveToNext());
     }
 }
