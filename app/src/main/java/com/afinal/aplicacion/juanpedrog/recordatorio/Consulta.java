@@ -15,7 +15,7 @@ import android.widget.Toast;
 
 import java.util.Calendar;
 
-public class Consulta extends AppCompatActivity implements AdapterView.OnItemClickListener{
+public class Consulta extends AppCompatActivity implements AdapterView.OnItemClickListener,View.OnClickListener{
 
     public DataBaseManager basedatos;
     Cursor cursor;
@@ -27,36 +27,44 @@ public class Consulta extends AppCompatActivity implements AdapterView.OnItemCli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_consulta);
+        //Variables
         calendar=Calendar.getInstance();
         basedatos=new DataBaseManager(this);
         Intent intentRegistros=getIntent();
         Bundle datos=intentRegistros.getExtras();
         lista=(ListView)findViewById(R.id.lista);
         lista.setOnItemClickListener(this);
+        //Verifica si hay extras
         if(datos==null){
 
         }else{
-            //Toast.makeText(this,arr[0]+","+arr[1]+","+arr[2]+","+arr[3],Toast.LENGTH_LONG).show();
             registros=datos.getStringArray("Registro");
             basedatos.insertar(registros);
         }
+        //Saca los datos de la base de datos y los inserta en un ListView
         String[] from=new String[]{basedatos.CN_NOMBRE,basedatos.CN_ARTICULO,basedatos.CN_DESCRIPCION,
                 basedatos.CN_FECHA_PRESTAMO,basedatos.CN_FECHA_DEVOLUCION,basedatos.CN_DISPONIBLE};
         int[] to=new int[]{R.id.Nom,R.id.Art,R.id.Desc,R.id.Fecha_Re,R.id.Fecha_Dev,R.id.Dispon};
         cursor=basedatos.crearCursorDatos();
+        //Actualiza la base de datos con la fecha de hoy
+        actualizar();
+        //Llena el listView
         adapter=new SimpleCursorAdapter(this,R.layout.lista,cursor,from,to);
         lista.setAdapter(adapter);
-        actualizar();
+        registerForContextMenu(lista);
+
     }
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        registerForContextMenu(view);
+
     }
+
 
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
         getMenuInflater().inflate(R.menu.contextmenu,menu);
+
     }
     @Override
     protected void onStart() {
@@ -64,6 +72,7 @@ public class Consulta extends AppCompatActivity implements AdapterView.OnItemCli
 
     }
     public String validar(String fecHoy,String fecDev){
+        //Crea un array para la fecha [dia,mes,año]
         String[] arrH=fecHoy.split("/");
         String[] arrD=fecDev.split("/");
         int[] numH=new int[arrH.length];
@@ -72,6 +81,7 @@ public class Consulta extends AppCompatActivity implements AdapterView.OnItemCli
             numH[i]=Integer.parseInt(arrH[i]);
             numD[i]=Integer.parseInt(arrD[i]);
         }
+        //Comparamos fechas para determinar el estado del registro
         if(numH[2]==numD[2]){
             if(numH[1]==numD[1]){
                 if(numH[0]==numD[0]){
@@ -122,13 +132,19 @@ public class Consulta extends AppCompatActivity implements AdapterView.OnItemCli
         String[] arr=new String[6];
         Toast.makeText(this,cursor.getString(1),Toast.LENGTH_SHORT).show();
             do{
+                //Toma cada uno de los valores de la base de datos
                 arr[0]=cursor.getString(1);
                 arr[1]=cursor.getString(2);
                 arr[2]=cursor.getString(3);
                 arr[3]=cursor.getString(4);
                 arr[4]=cursor.getString(5);
+                //Verifica si la fecha de devolucion con la fecha actual
                 arr[5]=validar(sacarFechaActual(),cursor.getString(5));
                 basedatos.modificar(arr);
             }while(cursor.moveToNext());
+    }
+
+    @Override
+    public void onClick(View v) {
     }
 }
