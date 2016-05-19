@@ -52,4 +52,7 @@ public class DataBaseManager {
         ,CN_DISPONIBLE};
         return db.query(TABLE_NAME,columnas,null,null,null,null,null);
     }
+    public void modificar(String[] registros){
+        db.update(TABLE_NAME,generadorContent(registros),CN_NOMBRE+"=?",new String[]{registros[0]});
+    }
 }

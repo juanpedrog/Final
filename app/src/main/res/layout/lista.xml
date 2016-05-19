@@ -3,9 +3,11 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <TextView
-        android:id="@+id/Id"
+        android:id="@+id/NomL"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="Nombre:"
+        android:textColor="#000000"
         android:textSize="16sp"/>
     <TextView
         android:id="@+id/Nom"
@@ -13,9 +15,23 @@
         android:layout_height="wrap_content"
         android:textSize="16sp"/>
     <TextView
+        android:id="@+id/ArtL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Articulo:"
+        android:textColor="#000000"
+        android:textSize="16sp"/>
+    <TextView
         android:id="@+id/Art"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="16sp"/>
+    <TextView
+        android:id="@+id/DescL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Descripcion:"
+        android:textColor="#000000"
         android:textSize="16sp"/>
     <TextView
         android:id="@+id/Desc"
@@ -23,14 +39,35 @@
         android:layout_height="wrap_content"
         android:textSize="16sp"/>
     <TextView
+        android:id="@+id/Fecha_ReL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Fecha del Registro:"
+        android:textColor="#000000"
+        android:textSize="16sp"/>
+    <TextView
         android:id="@+id/Fecha_Re"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="16sp"/>
     <TextView
+        android:id="@+id/Fecha_DevL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Fecha de Devolucion:"
+        android:textColor="#000000"
+        android:textSize="16sp"/>
+    <TextView
         android:id="@+id/Fecha_Dev"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="16sp"/>
+    <TextView
+        android:id="@+id/DispL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Estado:"
+        android:textColor="#000000"
         android:textSize="16sp"/>
     <TextView
         android:id="@+id/Dispon"

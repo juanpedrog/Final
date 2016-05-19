@@ -12,4 +12,6 @@
     <string name="txtArticulo">Nombre del articulo</string>
     <string name="lblDescripcion">Descripcion</string>
     <string name="txtDescripcion">Descricpion del articulo</string>
+    <string name="menuModif">Modificar</string>
+    <string name="menuEliminar">Eliminar</string>
 </resources>
