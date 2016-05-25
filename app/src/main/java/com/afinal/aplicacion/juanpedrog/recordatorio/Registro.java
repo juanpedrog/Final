@@ -92,6 +92,41 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
             }
         }
     }
+    public boolean validarDatePicker(String fecHoy,String fecDev){
+        String[] arrH=fecHoy.split("/");
+        String[] arrD=fecDev.split("/");
+        int[] numH=new int[arrH.length];
+        int[] numD=new int[arrD.length];
+        for(int i=0;i<arrH.length;i++){
+            numH[i]=Integer.parseInt(arrH[i]);
+            numD[i]=Integer.parseInt(arrD[i]);
+        }
+        if(numH[2]==numD[2]){
+            if(numH[1]==numD[1]){
+                if(numH[0]==numD[0]){
+                    return true;
+                }else{
+                    if(numH[0]>numD[0]){
+                        return false;
+                    }else{
+                        return true;
+                    }
+                }
+            }else{
+                if(numH[1]>numD[1]){
+                    return false;
+                }else{
+                    return true;
+                }
+            }
+        }else{
+            if(numH[2]>numD[2]){
+                return false;
+            }else{
+                return true;
+            }
+        }
+    }
     public void agregar(EditText nom,EditText art,EditText desc, DatePicker fec){
             registro[0] = nom.getText().toString();
             registro[1] = art.getText().toString();
@@ -105,7 +140,8 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
         switch (v.getId()){
             case R.id.btnAgregar:
                 if(nombre.getText().toString().equals("")||articulo.getText().toString().equals("")||
-                        descripcion.getText().toString().equals("")){
+                        descripcion.getText().toString().equals("")||!validarDatePicker(sacarFechaActual(),
+                    fecha.getDayOfMonth() + "/" + (fecha.getMonth() + 1) + "/" + fecha.getYear())){
                     kill=false;
                 }else{
                     kill=true;
@@ -118,7 +154,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
                     Toast.makeText(Registro.this, "Agregado " + nombre.getText().toString(), Toast.LENGTH_SHORT).show();
                     startActivity(intent);
                 }else{
-                    Toast.makeText(this,"¡Hay datos vacios!",Toast.LENGTH_LONG).show();
+
                     if(nombre.getText().toString().equals("")){
                         lblnom.setTextColor(Color.RED);
                     }
@@ -127,6 +163,12 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
                     }
                     if(descripcion.getText().toString().equals("")){
                         lbldesc.setTextColor(Color.RED);
+                    }
+                    if(!validarDatePicker(sacarFechaActual(),
+                            fecha.getDayOfMonth() + "/" + (fecha.getMonth() + 1) + "/" + fecha.getYear())){
+                        Toast.makeText(this,"¡Fecha no valida!",Toast.LENGTH_LONG).show();
+                    }else{
+                        Toast.makeText(this,"¡Hay datos vacios!",Toast.LENGTH_LONG).show();
                     }
                 }
                 break;
