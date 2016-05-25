@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:text="@string/nombre"
             android:textColor="#000000"
-            android:id="@+id/textView"
+            android:id="@+id/lblNomR"
             android:textSize="20sp"
             android:background="#ffffff"
             />
@@ -56,7 +56,7 @@
             android:layout_height="wrap_content"
             android:text="@string/articulo"
             android:textColor="#000000"
-            android:id="@+id/lblArticulo"
+            android:id="@+id/lblArticuloR"
             android:textSize="20sp"
             android:background="#ffffff"
             />
@@ -81,7 +81,7 @@
             android:layout_height="wrap_content"
             android:text="@string/lblDescripcion"
             android:textColor="#000000"
-            android:id="@+id/lblDescripcion"
+            android:id="@+id/lblDescripcionR"
             android:textSize="20sp"
             android:background="#ffffff"
             />

@@ -4,10 +4,17 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.CursorIndexOutOfBoundsException;
 import android.net.Uri;
+import android.support.v4.view.MenuCompat;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.SearchView;
 import android.support.v7.widget.SwitchCompat;
+import android.support.v7.widget.Toolbar;
 import android.view.ContextMenu;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnCreateContextMenuListener;
@@ -24,7 +31,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.util.Calendar;
 
-public class Consulta extends AppCompatActivity implements AdapterView.OnItemClickListener, View.OnClickListener{
+public class Consulta extends AppCompatActivity implements AdapterView.OnItemClickListener,SearchView.OnQueryTextListener{
 
     public DataBaseManager basedatos;
     Cursor cursor;
@@ -43,6 +50,8 @@ public class Consulta extends AppCompatActivity implements AdapterView.OnItemCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_consulta);
         //Variables
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
         calendar = Calendar.getInstance();
         basedatos = new DataBaseManager(this);
         Intent intentRegistros = getIntent();
@@ -56,7 +65,6 @@ public class Consulta extends AppCompatActivity implements AdapterView.OnItemCli
             basedatos.insertar(registros);
         }
 
-
         llenarTabla();
         //Actualiza la base de datos con la fecha de hoy
         actualizar();
@@ -66,7 +74,12 @@ public class Consulta extends AppCompatActivity implements AdapterView.OnItemCli
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
+    public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater menuInflater=getMenuInflater();
+        menuInflater.inflate(R.menu.menu_search,menu);
 
+        return  super.onCreateOptionsMenu(menu);
+    }
     public void llenarTabla() {
         //Saca los datos de la base de datos y los inserta en un ListView
         String[] from = new String[]{basedatos.CN_NOMBRE, basedatos.CN_ARTICULO, basedatos.CN_DESCRIPCION,
@@ -81,13 +94,22 @@ public class Consulta extends AppCompatActivity implements AdapterView.OnItemCli
     public boolean onContextItemSelected(MenuItem item) {
         AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
         View viewNom=info.targetView;
-        TextView nom=(TextView)findViewById(R.id.Fecha_Re);
+        TextView nom=(TextView)viewNom.findViewById(R.id.Fecha_Re);
         switch (item.getItemId()) {
             case R.id.menuEliminar:
                 basedatos.eliminar(nom.getText().toString());
                 llenarTabla();
                 actualizar();
                 break;
+            case R.id.menuCambiarEstado:
+                String ar[]=new String[]{
+                        cursor.getString(1),cursor.getString(2),
+                        cursor.getString(3),cursor.getString(4),
+                        cursor.getString(5),"Devuelto"
+                };
+                basedatos.modificar(ar);
+                llenarTabla();
+                actualizar();
         }
         return super.onContextItemSelected(item);
 
@@ -223,16 +245,16 @@ public class Consulta extends AppCompatActivity implements AdapterView.OnItemCli
                 arr[3] = cursor.getString(4);
                 arr[4] = cursor.getString(5);
                 //Verifica si la fecha de devolucion con la fecha actual
-                arr[5] = validar(sacarFechaActual(), cursor.getString(5));
+                if(!cursor.getString(6).equals("Devuelto")){
+                    arr[5] = validar(sacarFechaActual(), cursor.getString(5));
+                }else{
+                    arr[5]="Devuelto";
+                }
                 basedatos.modificar(arr);
             } while (cursor.moveToNext());
         }catch (CursorIndexOutOfBoundsException e){
             Toast.makeText(this, "No hay registros para mostrar", Toast.LENGTH_SHORT).show();
         }
-    }
-
-    @Override
-    public void onClick(View v) {
     }
 
 
@@ -254,5 +276,22 @@ public class Consulta extends AppCompatActivity implements AdapterView.OnItemCli
         );
         AppIndex.AppIndexApi.end(client, viewAction);
         client.disconnect();
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        boolean listo=false;
+        cursor.moveToFirst();
+        do{
+           if(cursor.getString(1).equals(query)){
+               Toast.makeText(this,"Encontrado",Toast.LENGTH_LONG).show();
+           }
+        }while(!listo);
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        return false;
     }
 }

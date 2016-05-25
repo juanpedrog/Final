@@ -1,6 +1,7 @@
 package com.afinal.aplicacion.juanpedrog.recordatorio;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Calendar;
@@ -19,6 +21,8 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
     EditText nombre,articulo,descripcion;
     Calendar calendar;
     String[] arr;
+    boolean kill=false;
+    TextView lblnom,lblart,lbldesc;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +35,9 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
         fecha=(DatePicker) findViewById(R.id.dateFecha);
         btnAgregar=(Button) findViewById(R.id.btnAgregar);
         btnAgregar.setOnClickListener(this);
+        lblnom=(TextView)findViewById(R.id.lblNomR);
+        lblart=(TextView)findViewById(R.id.lblArticuloR);
+        lbldesc=(TextView)findViewById(R.id.lblDescripcionR);
     }
     public String sacarFechaActual(){
         arr=calendar.getTime().toString().split(" ");
@@ -86,23 +93,42 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
         }
     }
     public void agregar(EditText nom,EditText art,EditText desc, DatePicker fec){
-        registro[0]=nom.getText().toString();
-        registro[1]=art.getText().toString();
-        registro[2]=desc.getText().toString();
-        registro[3]=calendar.getTime().toString();
-        registro[4]=fec.getDayOfMonth()+"/"+(fec.getMonth()+1)+"/"+fec.getYear();
-        registro[5]=validar(sacarFechaActual(),registro[4]);
+            registro[0] = nom.getText().toString();
+            registro[1] = art.getText().toString();
+            registro[2] = desc.getText().toString();
+            registro[3] = calendar.getTime().toString();
+            registro[4] = fec.getDayOfMonth() + "/" + (fec.getMonth() + 1) + "/" + fec.getYear();
+            registro[5] = validar(sacarFechaActual(), registro[4]);
     }
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btnAgregar:
-                Intent intent= new Intent(Registro.this,Consulta.class);
-                agregar(nombre,articulo,descripcion,fecha);
-                Toast.makeText(Registro.this,arr[1]+","+arr[2]+","+arr[5],Toast.LENGTH_LONG).show();
-                intent.putExtra("Registro",registro);
-                Toast.makeText(Registro.this,"Agregado "+nombre.getText().toString(), Toast.LENGTH_SHORT).show();
-                startActivity(intent);
+                if(nombre.getText().toString().equals("")||articulo.getText().toString().equals("")||
+                        descripcion.getText().toString().equals("")){
+                    kill=false;
+                }else{
+                    kill=true;
+                }
+                if (kill) {
+                    Intent intent = new Intent(Registro.this, Consulta.class);
+                    agregar(nombre, articulo, descripcion, fecha);
+                    Toast.makeText(Registro.this, arr[1] + "," + arr[2] + "," + arr[5], Toast.LENGTH_LONG).show();
+                    intent.putExtra("Registro", registro);
+                    Toast.makeText(Registro.this, "Agregado " + nombre.getText().toString(), Toast.LENGTH_SHORT).show();
+                    startActivity(intent);
+                }else{
+                    Toast.makeText(this,"¡Hay datos vacios!",Toast.LENGTH_LONG).show();
+                    if(nombre.getText().toString().equals("")){
+                        lblnom.setTextColor(Color.RED);
+                    }
+                    if(articulo.getText().toString().equals("")){
+                        lblart.setTextColor(Color.RED);
+                    }
+                    if(descripcion.getText().toString().equals("")){
+                        lbldesc.setTextColor(Color.RED);
+                    }
+                }
                 break;
         }
     }
